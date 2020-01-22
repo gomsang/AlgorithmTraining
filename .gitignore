@@ -1,0 +1,8 @@
+﻿# Ignore everything
+*
+
+# exclude
+!.gitignore
+!*.cpp
+!*.c
+!*.md
