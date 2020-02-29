@@ -15,7 +15,15 @@ void *bsearchx(const void *key, const void *base, size_t nmemb, size_t size, int
         } else if (result_compar < 0) {
             right = center - 1;
         } else {
-            return (char *) base + center * size;
+            int match = center;
+            while (match > 0) {
+                if (*((int *) base + (match - 1)) == *(int *) key) {
+                    match--;
+                } else {
+                    return (char *) base + match * size;
+                }
+            }
+            return (char *) base + match * size;
         }
     } while (left <= right);
 }
@@ -32,7 +40,7 @@ int compare(const void *a, const void *b) {
 
 int main(void) {
     int key = 5;
-    int array[] = {1, 2, 3, 5, 10, 13, 19, 20};
+    int array[] = {1, 2, 3, 5, 5, 5, 10, 13, 19, 20};
     size_t length = 8;
     size_t size = sizeof(int);
     int *p = (int *) bsearchx(&key, array, length, size, compare);
