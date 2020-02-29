@@ -22,7 +22,7 @@ void *binsearch(const void *key, const void *base, size_t nmemb, size_t size, in
     } while (left <= right);
 }
 
-int compar(const int *x, const int *y) {
+int compare(const int *x, const int *y) {
     if (*x > *y) {
         return 1;
     } else if (*x < *y) {
@@ -37,7 +37,7 @@ int main(void) {
     int base[] = {1, 2, 3, 4, 5};   // base array
     size_t nx = 5;                  // base array's length
     size_t size = sizeof(int);      // size of each elements in array.
-    int *p = (int *) binsearch(&key, base, nx, size, (int (*)(const void *, const void *)) compar);
+    int *p = (int *) binsearch(&key, base, nx, size, (int (*)(const void *, const void *)) compare);
 
     if (p == NULL)
         puts("search failed");
