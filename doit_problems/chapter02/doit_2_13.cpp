@@ -19,40 +19,37 @@ int isleap(int year) {
     return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 }
 
-Date DateOf(int y, int m, int d) {
-    Date date = Date{y, m, d};
-    return date;
-}
 
 Date After(Date x, int n) {
-    int keep = n + x.d;
-    x.d = 1;
-
-    while (keep > 0) {
-        if (keep <= mdays[isleap(x.y)][x.m]) {
-            x.d = keep;
-            keep = 0;
-        } else {
-            keep -= mdays[isleap(x.y)][x.m];
-            if (x.m >= 12) {
-                x.m = 1;
-                x.y++;
-            } else {
-                x.m++;
-            }
+    x.d += n;
+    while (x.d > mdays[isleap(x.y)][x.m - 1]) {
+        x.d -= mdays[isleap(x.y)][x.m - 1];
+        x.m += 1;
+        if (x.m > 12) {
+            x.m = 1;
+            x.y += 1;
         }
     }
     return x;
 }
 
 Date Before(Date x, int n) {
-
+    x.d -= n;
+    while (x.d < 1) {
+        x.m -= 1;
+        if (x.m < 1) {
+            x.m = 12;
+            x.y -= 1;
+        }
+        x.d += mdays[isleap(x.y)][x.m - 1];
+    }
+    return x;
 }
 
 int main() {
     Date d{
             2020, 2, 20
     };
-    Date after = After(d, 643);
+    Date after = Before(d, 222);
     printf("%d %d %d", after.y, after.m, after.d);
 }
