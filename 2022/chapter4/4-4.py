@@ -22,7 +22,7 @@ while True:
         x, y = x + MOVING_COMMAND[direction][0], y + MOVING_COMMAND[direction][1]
         moved += 1
         scan = 0
-        continuea
+        continue
 
     scan += 1
 
