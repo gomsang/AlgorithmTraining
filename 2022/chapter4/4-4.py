@@ -16,7 +16,7 @@ while True:
     game[y][x] = VISITED
 
     # rotate direction
-    direction = 3 if direction is 1 else direction - 1
+    direction = 3 if direction == 0 else direction - 1
 
     if game[y + MOVING_COMMAND[direction][1]][x + MOVING_COMMAND[direction][0]] is RAND:
         x, y = x + MOVING_COMMAND[direction][0], y + MOVING_COMMAND[direction][1]
@@ -25,7 +25,6 @@ while True:
         continue
 
     scan += 1
-
     if scan >= 4:
         scan = 0
         if game[y - MOVING_COMMAND[direction][1]][x - MOVING_COMMAND[direction][0]] is SEA:
